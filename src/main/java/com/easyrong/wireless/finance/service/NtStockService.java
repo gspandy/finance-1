@@ -1,10 +1,10 @@
 package com.easyrong.wireless.finance.service;
 
-import com.example.stock.base.BaseErrorInterfaceInfo;
-import com.example.stock.base.BaseRspEntity;
-import com.example.stock.entity.NtStockEntity;
-import com.example.stock.entity.NtStockRspEntity;
-import com.example.stock.utils.OkHttpUtil;
+import com.easyrong.wireless.finance.base.BaseErrorInterfaceInfo;
+import com.easyrong.wireless.finance.base.BaseRspEntity;
+import com.easyrong.wireless.finance.entity.NtStockEntity;
+import com.easyrong.wireless.finance.entity.NtStockRspEntity;
+import com.easyrong.wireless.finance.utils.OkHttpUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
