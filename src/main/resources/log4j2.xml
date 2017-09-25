@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" shutdownHook="disable">
+    <Properties>
+        <Property name="LOG_PATH">${sys:user.home}/logs/member</Property>
+        <Property name="LOG_PATTERN">%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="TRACE" fileName="${LOG_PATH}/trace/member-trace.log" 
+                     filePattern="${LOG_PATH}/trace/trace-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="ERROR" fileName="${LOG_PATH}/error/member-error.log"
+                     filePattern="${LOG_PATH}/error/error-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="INFO" fileName="${LOG_PATH}/info/member-info.log"
+                     filePattern="${LOG_PATH}/info/info-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="DEBUG" fileName="${LOG_PATH}/debug/member-debug.log"
+                     filePattern="${LOG_PATH}/debug/debug-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.xlh.member" level="trace" additivity="false">
+            <appender-ref ref="TRACE" level="trace"/>
+            <appender-ref ref="ERROR" level="error"/>
+            <appender-ref ref="INFO" level="info"/>
+            <appender-ref ref="DEBUG" level="debug"/>
+            <appender-ref ref="Console" level="debug"/>
+        </Logger>
+        <Root level="INFO" additivity="false">
+            <appender-ref ref="Console" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>
