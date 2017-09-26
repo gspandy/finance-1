@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Aspect
 @Order(5)
@@ -46,9 +47,10 @@ public class FinanceAspect {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+        HttpServletResponse response = attributes.getResponse();
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("loginname") != null) {
+        if (session.getAttribute("account") != null) {
             try {
                 result = pjp.proceed();
             } catch (Throwable e) {
@@ -56,7 +58,12 @@ public class FinanceAspect {
             }
             return result;
         } else {
-            result = new ModelAndView("login");
+            logger.debug("Session已超时，正在跳转回登录页面");
+            try {
+                response.sendRedirect(request.getContextPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }

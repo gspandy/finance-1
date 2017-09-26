@@ -52,10 +52,12 @@ spring:
 #      database: 0 #默认是索引为的0的数据库
 
   thymeleaf:
+    prefix: classpath:/templates/
     cache: false
     mode: HTML5
     encoding: UTF-8
     content-type: text/html
+    suffix: .html
 
 server:
   port: 8080

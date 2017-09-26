@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByName(user.getName()).isEmpty()) {
             userRepository.save(user);
             return "用户名  " + user.getName() + " 注册成功";
-
         } else {
             return "用户名 " + user.getName() + "已被占用！";
         }

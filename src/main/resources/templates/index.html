@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
@@ -9,18 +9,10 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-3 column">
-            <form role="form" method="POST" th:action="@{/userLogin}" th:object="${user}">
-
-                <label for="username">Name</label><input type="text" class="form-control" id="username" th:field="*{name}" />
-
-                <label for="password">Password</label><input type="password" class="form-control" id="password" th:field="*{password}" />
-
-
-                <button type="submit" class="btn btn-default">Sign in</button>
-            </form>
+            <label>欢迎使用张家港市金融机构在线申报系统 V1.0</label>
 
             <ul class="nav nav-pills">
-                <li role="presentation"><a href="register.html" class="href" target="_blank">Sign up</a></li>
+                <li role="presentation"><a href="login.html.html" class="href" target="_blank">请登录</a></li>
             </ul>
 
         </div>

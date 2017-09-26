@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
 
     @RequestMapping("/")
-    @ResponseBody
     public String welcome() {
-        return "欢迎使用张家港市金融机构在线申报系统 V1.0";
+        return "index";
     }
 
     @RequestMapping("/notVerify")
@@ -51,14 +52,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String userLogin(UserEntity user, Model model) {
+    public String userLogin(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
             model.addAttribute("name", user.getName());
             model.addAttribute("password", user.getPassword());
+            httpSession.setAttribute("account", verify);
+            httpSession.setMaxInactiveInterval(60);
             return "result";
         } else {
             return "redirect:/notVerify";
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.removeAttribute("account");
+        httpSession.invalidate();
+        return "redirect:/";
     }
 }
