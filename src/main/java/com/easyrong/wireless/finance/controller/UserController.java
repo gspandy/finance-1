@@ -58,7 +58,7 @@ public class UserController {
             model.addAttribute("name", user.getName());
             model.addAttribute("password", user.getPassword());
             httpSession.setAttribute("account", verify);
-            httpSession.setMaxInactiveInterval(60);
+//            httpSession.setMaxInactiveInterval(60);
             return "result";
         } else {
             return "redirect:/notVerify";

@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50622
  Source Host           : 172.16.11.120
- Source Database       : xlh_member
+ Source Database       : finance_user
 
  Target Server Type    : MySQL
  Target Server Version : 50622
@@ -33,10 +33,9 @@ CREATE TABLE `finance_user` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_member_user_mobile` (`mobile`) USING BTREE,
-  KEY `idx_member_user_user_account` (`name`) USING BTREE,
-  KEY `idx_member_user_reg_time` (`reg_time`),
-  KEY `idx_member_user_create_time` (`create_time`) USING BTREE
+  UNIQUE KEY `idx_finance_user_name` (`mobile`) USING BTREE,
+  KEY `idx_finance_user_reg_time` (`reg_time`),
+  KEY `idx_finance_user_create_time` (`create_time`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=78379 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 SET FOREIGN_KEY_CHECKS = 1;
