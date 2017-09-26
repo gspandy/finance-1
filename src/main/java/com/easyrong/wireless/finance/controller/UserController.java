@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,12 +18,6 @@ public class UserController {
     @RequestMapping("/")
     public String welcome() {
         return "index";
-    }
-
-    @RequestMapping("/notVerify")
-    @ResponseBody
-    public String notVerify() {
-        return "用户名或者密码错误";
     }
 
     @RequestMapping("/login")
@@ -46,22 +39,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    @ResponseBody
-    public String registerUser(UserEntity user, Model model) {
-        return userService.registerUser(user);
+    public String registerUser(UserEntity user, Model model, HttpSession httpSession) {
+        boolean verify = userService.registerUser(user);
+        if (verify) {
+            model.addAttribute("messages", "用户：" + user.getName() + " 注册成功，密码是：" + user.getPassword() + " 自动登录，session失效时间1分钟");
+            httpSession.setAttribute("account", verify);
+            httpSession.setMaxInactiveInterval(60);
+            return "succeed";
+        } else {
+            model.addAttribute("messages", "用户：" + user.getName() + " 注册失败，用户名已被占用");
+            return "result";
+        }
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public String userLogin(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
-            model.addAttribute("name", user.getName());
-            model.addAttribute("password", user.getPassword());
+            model.addAttribute("messages", "用户：" + user.getName() + " 登录成功，密码是：" + user.getPassword() + " session失效时间1分钟");
             httpSession.setAttribute("account", verify);
-//            httpSession.setMaxInactiveInterval(60);
-            return "result";
+            httpSession.setMaxInactiveInterval(60);
+            return "succeed";
         } else {
-            return "redirect:/notVerify";
+            model.addAttribute("messages", "用户：" + user.getName() + " 登录失败，用户名或密码错误");
+            return "result";
         }
     }
 

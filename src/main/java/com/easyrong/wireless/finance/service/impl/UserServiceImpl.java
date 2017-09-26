@@ -21,12 +21,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String registerUser(UserEntity user) {
+    public boolean registerUser(UserEntity user) {
         if (userRepository.findByName(user.getName()).isEmpty()) {
             userRepository.save(user);
-            return "用户名  " + user.getName() + " 注册成功";
+            return true;
         } else {
-            return "用户名 " + user.getName() + "已被占用！";
+            return false;
         }
     }
 }
