@@ -47,13 +47,6 @@ public class FinanceAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
-        HttpServletResponse response = null;
-        for (Object param : pjp.getArgs()) {
-            if (param instanceof HttpServletResponse) {
-                response = (HttpServletResponse) param;
-            }
-        }
-
         HttpSession session = request.getSession();
         if (session.getAttribute("loginname") != null) {
             try {

@@ -15,8 +15,8 @@ public class UserEntity {
     @Column(nullable = false, name = "mobile")
     private long mobile;
 
-    @Column(nullable = false, name = "account")
-    private String account;
+    @Column(nullable = false, name = "name")
+    private String name;
 
 
     @Column(nullable = false, name = "password")
@@ -61,12 +61,12 @@ public class UserEntity {
         this.mobile = mobile;
     }
 
-    public String getAccount() {
-        return account;
+    public String getName() {
+        return name;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
