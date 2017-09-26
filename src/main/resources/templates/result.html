@@ -12,10 +12,10 @@
             <label th:text="${messages}"/>
         </div>
         <ul class="nav nav-pills">
-            <li role="presentation"><a href="login.html" class="href" target="_blank">请登录</a></li>
+            <li role="presentation"><a th:href="@{'/login'}" class="href" target="_self">请登录</a></li>
         </ul>
         <ul class="nav nav-pills">
-            <li role="presentation"><a href="register.html" class="href" target="_blank">注册</a></li>
+            <li role="presentation"><a th:href="@{'/register'}" class="href" target="_self">注册</a></li>
         </ul>
     </div>
 </div>

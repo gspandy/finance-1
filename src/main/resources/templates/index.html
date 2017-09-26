@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
@@ -12,7 +12,7 @@
             <label>欢迎使用张家港市金融机构在线申报系统 V1.0</label>
 
             <ul class="nav nav-pills">
-                <li role="presentation"><a href="login.html" class="href" target="_blank">请登录</a></li>
+                <li role="presentation"><a th:href="@{'/login'}" class="href" target="_self">请登录</a></li>
             </ul>
 
         </div>
