@@ -2,6 +2,7 @@ package com.easyrong.wireless.finance.controller;
 
 import com.easyrong.wireless.finance.entity.UserEntity;
 import com.easyrong.wireless.finance.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,30 +16,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ApiOperation(value = "默认", notes = "默认")
     public String welcome() {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @ApiOperation(value = "登录", notes = "登录")
     public String login(Model model) {
         model.addAttribute("user", new UserEntity());
         return "login";
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @ApiOperation(value = "首页", notes = "首页")
     public String index(Model model) {
         model.addAttribute("user", new UserEntity());
         return "index";
     }
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @ApiOperation(value = "注册", notes = "注册页面")
     public String register(Model model) {
         model.addAttribute("user", new UserEntity());
         return "register";
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    @ApiOperation(value = "注册", notes = "注册数据提交")
     public String registerUser(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.registerUser(user);
         if (verify) {
@@ -53,6 +59,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    @ApiOperation(value = "登录", notes = "登录数据提交")
     public String userLogin(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
@@ -66,7 +73,8 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @ApiOperation(value = "登出", notes = "登出清除Session")
     public String logout(HttpSession httpSession) {
         httpSession.removeAttribute("account");
         httpSession.invalidate();
