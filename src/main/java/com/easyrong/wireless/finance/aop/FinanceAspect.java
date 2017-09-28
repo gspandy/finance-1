@@ -1,7 +1,5 @@
 package com.easyrong.wireless.finance.aop;
 
-import com.alibaba.fastjson.JSON;
-import com.easyrong.wireless.finance.base.BaseRspEntity;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -11,7 +9,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,11 +79,11 @@ public class FinanceAspect {
         logger.info("IP地址 : " + request.getRemoteAddr());
         logger.info("处理接口 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 
-        if ("POST".equals(request.getMethod())) {
-            logger.info("请求参数 : " + JSON.toJSONString(joinPoint.getArgs()));
-        } else {
-            logger.info("请求参数 : " + request.getQueryString());
-        }
+//        if ("POST".equals(request.getMethod())) {
+//            logger.info("请求参数 : " + JSON.toJSONString(joinPoint.getArgs()));
+//        } else {
+//            logger.info("请求参数 : " + request.getQueryString());
+//        }
 
     }
 

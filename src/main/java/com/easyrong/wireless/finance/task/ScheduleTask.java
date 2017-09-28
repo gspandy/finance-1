@@ -12,7 +12,7 @@ import java.util.Date;
 public class ScheduleTask {
     private Logger logger = LoggerFactory.getLogger(FinanceAspect.class);
 
-    @Scheduled(fixedRate = 5000,initialDelay = 1000)
+    @Scheduled(fixedRate = 360000,initialDelay = 1000)
     public void printSay() {
         logger.info("[Roc] ScheduleTask time = " + new Date());
     }

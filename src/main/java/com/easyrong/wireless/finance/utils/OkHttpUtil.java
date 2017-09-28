@@ -3,6 +3,8 @@ package com.easyrong.wireless.finance.utils;
 import com.easyrong.wireless.finance.base.BaseErrorInterfaceInfo;
 import com.easyrong.wireless.finance.base.BaseRspEntity;
 import okhttp3.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 @Component
 public class OkHttpUtil {
+    private Logger logger = LoggerFactory.getLogger(OkHttpUtil.class);
     public static final MediaType mediaType
             = MediaType.parse("application/json; charset=utf-8");
 
@@ -35,7 +38,7 @@ public class OkHttpUtil {
 
         try (Response response = client.newCall(request).execute()) {
             String res = response.body().string();
-            System.out.println("[roc]" + res);
+            logger.info("[roc]" + res);
             return res;
         }
     }

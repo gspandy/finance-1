@@ -18,7 +18,8 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ApiOperation(value = "默认", notes = "默认")
-    public String welcome() {
+    public String welcome(Model model) {
+        model.addAttribute("messages", "欢迎使用张家港市金融机构在线申报系统 V1.0");
         return "index";
     }
 
@@ -32,7 +33,7 @@ public class UserController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     @ApiOperation(value = "首页", notes = "首页")
     public String index(Model model) {
-        model.addAttribute("user", new UserEntity());
+        model.addAttribute("messages", "欢迎使用张家港市金融机构在线申报系统 V1.0");
         return "index";
     }
 
@@ -48,9 +49,9 @@ public class UserController {
     public String registerUser(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.registerUser(user);
         if (verify) {
-            model.addAttribute("messages", "用户：" + user.getName() + " 注册成功，密码是：" + user.getPassword() + " 自动登录，session失效时间1分钟");
+            model.addAttribute("messages", "用户：" + user.getName() + " 注册成功，密码是：" + user.getPassword() + " 自动登录，session失效时间10分钟");
             httpSession.setAttribute("account", verify);
-            httpSession.setMaxInactiveInterval(60);
+            httpSession.setMaxInactiveInterval(600);
             return "succeed";
         } else {
             model.addAttribute("messages", "用户：" + user.getName() + " 注册失败，用户名已被占用");
@@ -63,9 +64,10 @@ public class UserController {
     public String userLogin(UserEntity user, Model model, HttpSession httpSession) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
-            model.addAttribute("messages", "用户：" + user.getName() + " 登录成功，密码是：" + user.getPassword() + " session失效时间1分钟");
+            model.addAttribute("messages", "用户：" + user.getName() + " 登录成功，密码是：" + user.getPassword() + " session失效时间10分钟，可在 userLogin 接口中配置 ");
             httpSession.setAttribute("account", verify);
-            httpSession.setMaxInactiveInterval(60);
+            //设置Session失效时间，单位秒
+            httpSession.setMaxInactiveInterval(600);
             return "succeed";
         } else {
             model.addAttribute("messages", "用户：" + user.getName() + " 登录失败，用户名或密码错误");

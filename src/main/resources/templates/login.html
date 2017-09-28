@@ -8,21 +8,18 @@
 <body>
 <div class="container">
     <div class="row clearfix">
+        <div class="col-md-12 column">
+            <label/>
+        </div>
         <div class="col-md-3 column">
             <form role="form" method="POST" th:action="@{/userLogin}" th:object="${user}">
-
                 <label for="username">用户名</label><input type="text" class="form-control" id="username" th:field="*{name}" />
-
                 <label for="password">密码</label><input type="password" class="form-control" id="password" th:field="*{password}" />
-
-
                 <button type="submit" class="btn btn-default">登录</button>
             </form>
-
             <ul class="nav nav-pills">
                 <li role="presentation"><a th:href="@{'/register'}" class="href" target="_self">注册</a></li>
             </ul>
-
         </div>
     </div>
 </div>

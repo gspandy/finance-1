@@ -56,6 +56,11 @@ public enum BaseErrorInterfaceInfo implements BaseErrorInterface {
     PARAMS_ERROR("422", "请求错误"),
 
     /**
+     * 上传文件失败
+     */
+    UPLOAD_ERROR("430", "上传失败"),
+
+    /**
      * 标准服务端错误，API开发人员应该尽量避开这种错误
      */
     SERVER_ERROR("500", "服务端错误");

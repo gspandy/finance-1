@@ -58,7 +58,11 @@ spring:
     encoding: UTF-8
     content-type: text/html
     suffix: .html
-
+#  文件上传大小限制配置
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 server:
   port: 8080
 
