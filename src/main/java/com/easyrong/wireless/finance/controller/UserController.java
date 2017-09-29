@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -46,12 +47,11 @@ public class UserController {
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     @ApiOperation(value = "注册", notes = "注册数据提交")
-    public String registerUser(UserEntity user, Model model, HttpSession httpSession) {
+    public String registerUser(UserEntity user, Model model, HttpServletRequest request) {
         boolean verify = userService.registerUser(user);
         if (verify) {
             model.addAttribute("messages", "用户：" + user.getName() + " 注册成功，密码是：" + user.getPassword() + " 自动登录，session失效时间10分钟");
-            httpSession.setAttribute("account", verify);
-            httpSession.setMaxInactiveInterval(600);
+            request.getSession().setAttribute("account", verify);
             return "succeed";
         } else {
             model.addAttribute("messages", "用户：" + user.getName() + " 注册失败，用户名已被占用");
@@ -61,13 +61,11 @@ public class UserController {
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录数据提交")
-    public String userLogin(UserEntity user, Model model, HttpSession httpSession) {
+    public String userLogin(UserEntity user, Model model, HttpServletRequest request) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
             model.addAttribute("messages", "用户：" + user.getName() + " 登录成功，密码是：" + user.getPassword() + " session失效时间10分钟，可在 userLogin 接口中配置 ");
-            httpSession.setAttribute("account", verify);
-            //设置Session失效时间，单位秒
-            httpSession.setMaxInactiveInterval(600);
+            request.getSession().setAttribute("account", verify);
             return "succeed";
         } else {
             model.addAttribute("messages", "用户：" + user.getName() + " 登录失败，用户名或密码错误");
@@ -77,9 +75,9 @@ public class UserController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ApiOperation(value = "登出", notes = "登出清除Session")
-    public String logout(HttpSession httpSession) {
-        httpSession.removeAttribute("account");
-        httpSession.invalidate();
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("account");
+        request.getSession().invalidate();
         return "redirect:/";
     }
 }

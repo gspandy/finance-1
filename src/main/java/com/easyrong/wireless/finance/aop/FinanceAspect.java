@@ -48,6 +48,7 @@ public class FinanceAspect {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("account") != null) {
+            logger.info("Session id = " + session.getId());
             try {
                 result = pjp.proceed();
             } catch (Throwable e) {
@@ -55,7 +56,7 @@ public class FinanceAspect {
             }
             return result;
         } else {
-            logger.debug("Session已超时，正在跳转回登录页面");
+            logger.info("Session id = " + session.getId() + " 超时，跳转到登录页面");
             try {
                 response.sendRedirect(request.getContextPath());
             } catch (IOException e) {
