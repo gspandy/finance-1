@@ -14,6 +14,6 @@ public class ScheduleTask {
 
     @Scheduled(fixedRate = 360000,initialDelay = 1000)
     public void printSay() {
-        logger.info("[Roc] ScheduleTask time = " + new Date());
+        logger.info("[定时任务] ScheduleTask time = " + new Date());
     }
 }

@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 /**
  * 新三板数据
  */
-public class NtStockRspEntity {
+public class NeeqRspEntity {
     private String code;
     private String closePrice;   //收盘价
     private double allValue; //总股本万元

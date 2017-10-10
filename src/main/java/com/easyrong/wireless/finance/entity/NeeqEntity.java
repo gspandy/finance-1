@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NtStockEntity {
+public class NeeqEntity {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
@@ -27,29 +27,29 @@ public class NtStockEntity {
         this.reason = reason;
     }
 
-    public NtStockBody getResult() {
+    public NeeqBody getResult() {
         return result;
     }
 
-    public void setResult(NtStockBody result) {
+    public void setResult(NeeqBody result) {
         this.result = result;
     }
 
     private int error_code;
     private String reason;
-    private NtStockBody result = new NtStockBody();
+    private NeeqBody result = new NeeqBody();
 
-    public class NtStockBody {
+    public class NeeqBody {
         @Override
         public String toString() {
             return JSON.toJSONString(this);
         }
 
-        public List<StockIndex> getResult() {
+        public List<NeeqIndex> getResult() {
             return result;
         }
 
-        public void setResult(List<StockIndex> result) {
+        public void setResult(List<NeeqIndex> result) {
             this.result = result;
         }
 
@@ -93,7 +93,7 @@ public class NtStockEntity {
             this.start = start;
         }
 
-        private List<StockIndex> result = new ArrayList<>();
+        private List<NeeqIndex> result = new ArrayList<>();
         private int currentPage;
         private int totalPages;
         private int pageSize;
@@ -101,7 +101,7 @@ public class NtStockEntity {
         private int start;
     }
 
-    public class StockIndex {
+    public class NeeqIndex {
         @Override
         public String toString() {
             return JSON.toJSONString(this);

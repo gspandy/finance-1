@@ -2,7 +2,7 @@ package com.easyrong.wireless.finance.entity;
 
 import com.alibaba.fastjson.JSON;
 
-public class StockRspEntity {
+public class AsharesRspEntity {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
