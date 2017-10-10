@@ -3,8 +3,8 @@ package com.easyrong.wireless.finance.utils;
 import com.easyrong.wireless.finance.base.BaseErrorInterfaceInfo;
 import com.easyrong.wireless.finance.base.BaseRspEntity;
 import okhttp3.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,7 +14,8 @@ import java.util.Map;
 
 @Component
 public class OkHttpUtil {
-    private Logger logger = LoggerFactory.getLogger(OkHttpUtil.class);
+    public static final Logger logger = LogManager.getLogger(OkHttpUtil.class.getName());
+
     public static final MediaType mediaType
             = MediaType.parse("application/json; charset=utf-8");
 
@@ -33,7 +34,7 @@ public class OkHttpUtil {
 
     public String run(String url, Map<String, String> param) throws IOException {
         Request request = new Request.Builder()
-                .url(createUrl(url,param))
+                .url(createUrl(url, param))
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

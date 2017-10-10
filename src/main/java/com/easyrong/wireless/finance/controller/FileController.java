@@ -1,7 +1,7 @@
 package com.easyrong.wireless.finance.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class FileController {
 
-    private Logger logger = LoggerFactory.getLogger(FileController.class);
+    public static final Logger logger = LogManager.getLogger(FileController.class.getName());
 
     /**
      * 获取file.html页面
@@ -111,7 +111,7 @@ public class FileController {
                 try {
                     file.transferTo(dest);
 
-                    sb.append("文件：" + fileName + " 上传到: " + path + " 成功!" +"\r\n");
+                    sb.append("文件：" + fileName + " 上传到: " + path + " 成功!" + "\r\n");
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

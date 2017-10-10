@@ -1,8 +1,7 @@
 package com.easyrong.wireless.finance.task;
 
-import com.easyrong.wireless.finance.aop.FinanceAspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +9,9 @@ import java.util.Date;
 
 @Component
 public class ScheduleTask {
-    private Logger logger = LoggerFactory.getLogger(FinanceAspect.class);
+    public static final Logger logger = LogManager.getLogger(ScheduleTask.class.getName());
 
-    @Scheduled(fixedRate = 360000,initialDelay = 1000)
+    @Scheduled(fixedRate = 360000, initialDelay = 1000)
     public void printSay() {
         logger.info("[定时任务] ScheduleTask time = " + new Date());
     }

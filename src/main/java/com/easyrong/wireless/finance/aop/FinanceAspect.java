@@ -1,10 +1,10 @@
 package com.easyrong.wireless.finance.aop;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @Component
 public class FinanceAspect {
 
-    private Logger logger = LoggerFactory.getLogger(FinanceAspect.class);
+    public static final Logger logger = LogManager.getLogger(FinanceAspect.class.getName());
 
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
