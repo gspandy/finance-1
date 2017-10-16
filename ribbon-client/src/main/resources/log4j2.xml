@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--设置log4j2的自身log级别为warn -->
+<Configuration status="WARN" monitorInterval="30" shutdownHook="disable">
+    <Properties>
+        <Property name="LOG_PATH">${sys:user.home}/logs/finance</Property>
+        <Property name="LOG_PATTERN">%style{%d{yyyy-MM-dd HH:mm:ss.SSS}} %style{%-5level}{green} %style{[%t]}{magenta} %style{%logger{100}}{cyan} %style{%msg%n%throwable}</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="TRACE" fileName="${LOG_PATH}/trace/finance-trace.log"
+                     filePattern="${LOG_PATH}/trace/trace-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="ERROR" fileName="${LOG_PATH}/error/finance-error.log"
+                     filePattern="${LOG_PATH}/error/error-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="INFO" fileName="${LOG_PATH}/info/finance-info.log"
+                     filePattern="${LOG_PATH}/info/info-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="DEBUG" fileName="${LOG_PATH}/debug/finance-debug.log"
+                     filePattern="${LOG_PATH}/debug/debug-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.easyrong.wireless.finance" level="trace" additivity="false">
+            <appender-ref ref="TRACE" level="trace"/>
+            <appender-ref ref="ERROR" level="error"/>
+            <appender-ref ref="INFO" level="info"/>
+            <appender-ref ref="DEBUG" level="debug"/>
+            <appender-ref ref="Console" level="debug"/>
+        </Logger>
+        <Root level="INFO" additivity="false">
+            <appender-ref ref="Console" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>

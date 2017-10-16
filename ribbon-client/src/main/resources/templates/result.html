@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <label/>
+        </div>
+        <div class="col-md-12 column">
+            <label th:text="${messages}"/>
+        </div>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a th:href="@{'/login'}" class="href" target="_self">请登录</a></li>
+        </ul>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a th:href="@{'/register'}" class="href" target="_self">注册</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

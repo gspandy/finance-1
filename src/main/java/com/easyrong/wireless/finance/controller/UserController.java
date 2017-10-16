@@ -45,10 +45,10 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/userRegister", method = RequestMethod.POST)
     @ApiOperation(value = "注册", notes = "注册数据提交")
-    public String registerUser(UserEntity user, Model model, HttpServletRequest request) {
-        boolean verify = userService.registerUser(user);
+    public String userRegister(UserEntity user, Model model, HttpServletRequest request) {
+        boolean verify = userService.userRegister(user);
         if (verify) {
             model.addAttribute("messages", "用户：" + user.getName() + " 注册成功，密码是：" + user.getPassword() + " 自动登录，session失效时间10分钟");
             request.getSession().setAttribute("account", verify);
@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录数据提交")
     public String userLogin(UserEntity user, Model model, HttpServletRequest request) {
-        boolean verify = userService.verifyUser(user);
+        boolean verify = userService.userLogin(user);
         if (verify) {
             model.addAttribute("messages", "用户：" + user.getName() + " 登录成功，密码是：" + user.getPassword() + " session失效时间10分钟，可在 userLogin 接口中配置 ");
             request.getSession().setAttribute("account", verify);

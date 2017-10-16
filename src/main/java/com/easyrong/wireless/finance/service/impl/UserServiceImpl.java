@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public boolean verifyUser(UserEntity user) {
+    public boolean userLogin(UserEntity user) {
         if (userRepository.findByNameAndPassword(user.getName(), user.getPassword()).isEmpty()) {
             return false;
         } else {
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registerUser(UserEntity user) {
+    public boolean userRegister(UserEntity user) {
         if (userRepository.findByName(user.getName()).isEmpty()) {
             userRepository.save(user);
             return true;

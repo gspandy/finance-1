@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: finance-ribbon-user
+  profiles:
+    active: dev
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    suffix: .html
+server:
+  port: 9010
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:9001/eureka/

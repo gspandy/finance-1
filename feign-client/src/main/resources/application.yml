@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: finance-feign-client
+  profiles:
+    active: dev
+server:
+  port: 9020

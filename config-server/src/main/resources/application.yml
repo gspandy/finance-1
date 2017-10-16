@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: finance-config-server
+  profiles:
+      active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/gitroc/config-git.git
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 9002
+management:
+  security:
+    enabled: false
