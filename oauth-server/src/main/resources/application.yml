@@ -33,6 +33,17 @@ spring:
         format_sql: true
         hbm2ddl:
           auto: update
+  # 配置redis数据库连接
+  redis:
+    host: localhost
+    port: 6379
+    pool:
+      max-idle: 20
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      database: 1 # 默认是索引为的0的数据库
+  #    password: redis
 server:
   port: 9003
   context-path: /uaa

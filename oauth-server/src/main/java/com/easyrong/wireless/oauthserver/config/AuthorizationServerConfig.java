@@ -3,6 +3,7 @@ package com.easyrong.wireless.oauthserver.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -19,36 +20,47 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private RedisConnectionFactory connectionFactory;
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore()).userDetailsService(userDetailsService);
+//    @Bean
+//    public RedisTokenStore tokenStore() {
+//        return new RedisTokenStore(connectionFactory);
+//    }
+    @Bean
+    public InMemoryTokenStore tokenStore() {
+        return new InMemoryTokenStore();
     }
     @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints
+                .authenticationManager(authenticationManager)
+                .tokenStore(tokenStore())
+                .userDetailsService(userDetailsService);
+    }
+
+    @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()");
+        oauthServer
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("browser")
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("ui")
-                .and()
-                .withClient("resource-server")
-                .secret("root")
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server")
-                .and()
-                .withClient("zjgfinance")
+                .withClient("zjg-password")
                 .secret("xlh123456")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                .scopes("xx");
-    }
-
-    @Bean
-    public InMemoryTokenStore tokenStore() {
-        return new InMemoryTokenStore();
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("read")
+                .and()
+                .withClient("zjg-resource")
+                .secret("xlh123456")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("read")
+                .and()
+                .withClient("zjg-implicit")
+                .authorizedGrantTypes("implicit")
+                .scopes("read");
     }
 }

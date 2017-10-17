@@ -1,38 +1,23 @@
-package com.easyrong.wireless.oauthserver.domain;
+package com.easyrong.wireless.oauthserver.entity;
 
 import com.alibaba.fastjson.JSON;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "finance_user")
-public class UserEntity {
+@Table(name = "api_user")
+public class ApiUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false, name = "mobile")
-    private long mobile;
-
     @Column(nullable = false, name = "name")
     private String name;
 
-
     @Column(nullable = false, name = "password")
     private String password;
-
-    @Column(nullable = false, name = "type")
-    private int type;
-
-    @Column(name = "avatar")
-    private String avatar;
-
-    @Column(name = "regTime")
-    private Timestamp regTime;
-
-    @Column(name = "lastLoginTime")
-    private Timestamp lastLoginTime;
 
     @Column(nullable = false, name = "createTime")
     private Timestamp createTime;
@@ -53,14 +38,6 @@ public class UserEntity {
         this.id = id;
     }
 
-    public long getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(long mobile) {
-        this.mobile = mobile;
-    }
-
     public String getName() {
         return name;
     }
@@ -75,38 +52,6 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Timestamp getRegTime() {
-        return regTime;
-    }
-
-    public void setRegTime(Timestamp regTime) {
-        this.regTime = regTime;
-    }
-
-    public Timestamp getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Timestamp lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     public Timestamp getCreateTime() {

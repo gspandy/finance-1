@@ -25,8 +25,8 @@ public class UserEntity {
     @Column(nullable = false, name = "type")
     private int type;
 
-    @Column(name = "avatar")
-    private String avatar;
+    @Column(name = "duty")
+    private String duty;
 
     @Column(name = "regTime")
     private Timestamp regTime;
@@ -85,12 +85,12 @@ public class UserEntity {
         this.type = type;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getduty() {
+        return duty;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setduty(String duty) {
+        this.duty = duty;
     }
 
     public Timestamp getRegTime() {
