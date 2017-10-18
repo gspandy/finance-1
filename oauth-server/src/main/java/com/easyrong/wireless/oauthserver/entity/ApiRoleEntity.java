@@ -2,18 +2,19 @@ package com.easyrong.wireless.oauthserver.entity;
 
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.BatchSize;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "api_user")
-public class ApiUserEntity implements Serializable {
+@Table(name = "api_role")
+public class ApiRoleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,24 +22,23 @@ public class ApiUserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false, name = "name", unique = true, columnDefinition = "varchar(250) COMMENT '用户名称'")
+    @Column(nullable = false, name = "name", unique = true, columnDefinition = "varchar(250) COMMENT '角色名称'")
     private String name;
 
-    @Column(nullable = false, name = "password", columnDefinition = "varchar(50) COMMENT '密码'")
-    private String password;
+    @Column(nullable = false, name = "value", columnDefinition = "varchar(50) COMMENT '角色值'")
+    private String value;
 
+    @CreationTimestamp
     @Column(nullable = false, name = "createTime", columnDefinition = "DATETIME COMMENT '创建时间'")
     private Timestamp createTime = new Timestamp(System.currentTimeMillis());
 
+    @UpdateTimestamp
     @Column(nullable = false, name = "updateTime", columnDefinition = "DATETIME COMMENT '修改时间'")
     private Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
-    @ManyToMany(targetEntity = ApiRoleEntity.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = ApiAuthorityEntity.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
-    private Set<ApiRoleEntity> roles = new HashSet<>();
-
-    @Transient
-    private Set<GrantedAuthority> authorities = new HashSet<>();
+    private Set<ApiAuthorityEntity> authoritys = new HashSet<>();
 
     @Override
     public String toString() {
@@ -61,12 +61,12 @@ public class ApiUserEntity implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getValue() {
+        return value;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Timestamp getCreateTime() {
@@ -85,26 +85,11 @@ public class ApiUserEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Set<ApiRoleEntity> getRoles() {
-        return roles;
+    public Set<ApiAuthorityEntity> getAuthoritys() {
+        return authoritys;
     }
 
-    public void setRoles(Set<ApiRoleEntity> roles) {
-        this.roles = roles;
-    }
-
-    public Set<GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for(ApiRoleEntity role : this.roles){
-            for(ApiAuthorityEntity authority : role.getAuthoritys()){
-                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getValue()));
-            }
-        }
-
-        return grantedAuthorities;
-    }
-
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
-        this.authorities = authorities;
+    public void setAuthoritys(Set<ApiAuthorityEntity> authoritys) {
+        this.authoritys = authoritys;
     }
 }

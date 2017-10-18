@@ -29,6 +29,7 @@ spring:
   jpa:
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect #方言
         show_sql: true
         format_sql: true
         hbm2ddl:
@@ -47,9 +48,15 @@ spring:
 server:
   port: 9003
   context-path: /uaa
-security:
-  sessions: stateless
 
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
+management:
+  security:
+    enabled: false
 eureka:
   client:
     serviceUrl:

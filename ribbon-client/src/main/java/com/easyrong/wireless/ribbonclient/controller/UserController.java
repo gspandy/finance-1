@@ -28,8 +28,6 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setName("13888888888");
-        userEntity.setPassword("xlh123456");
         model.addAttribute("user", userEntity);
         return "login";
     }

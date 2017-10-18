@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -47,7 +48,8 @@ public class UserController {
 
     @ApiOperation(value = "获取用户信息", notes = "根据用户id获取单个用户信息")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public Object findOne(@PathVariable("id") int id) throws BaseException {
+    @PreAuthorize("hasAuthority('query-demo')")
+    public Object findOne(@PathVariable("id") long id) throws BaseException {
         return new BaseRspEntity(userService.findById(id));
     }
 

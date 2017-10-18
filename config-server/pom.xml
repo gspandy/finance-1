@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.easyrong.wireless</groupId>
-	<artifactId>config-server</artifactId>
+	<artifactId>com.easyrong.wireless.financegateway.config-server</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>config-server</name>
+	<name>com.easyrong.wireless.financegateway.config-server</name>
 	<description>分布式配置中心</description>
 
 	<parent>
@@ -28,7 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<artifactId>spring-cloud-com.easyrong.wireless.financegateway.config-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

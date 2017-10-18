@@ -6,6 +6,15 @@ spring:
 
 server:
   port: 9030
+  context-path: /user
+
+management:
+  security:
+    enabled: false
+
+feign:
+  hystirx:
+    enable: true
 
 eureka:
   instance:
@@ -17,3 +26,10 @@ eureka:
     fetchRegistry: true
     service-url:
       defaultZone: http://localhost:9001/eureka/
+
+security:
+  oauth2:
+    resource:
+      id: finance-user
+      user-info-uri: http://localhost:8080/uaa/user
+      prefer-token-info: false

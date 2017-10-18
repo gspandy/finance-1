@@ -1,13 +1,13 @@
 spring:
   application:
-    name: finance-config-server
+    name: finance-com.easyrong.wireless.financegateway.config-server
   profiles:
       active: dev
   cloud:
-    config:
+    com.easyrong.wireless.financegateway.config:
       server:
         git:
-          uri: https://github.com/gitroc/config-git.git
+          uri: https://github.com/gitroc/com.easyrong.wireless.financegateway.config-git.git
   rabbitmq:
     host: localhost
     port: 5672

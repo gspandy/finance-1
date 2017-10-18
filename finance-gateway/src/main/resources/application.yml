@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+management:
+  security:
+    enabled: false
+
 spring:
   application:
     name: finance-gateway
@@ -13,15 +17,21 @@ eureka:
 zuul:
   ignored-services: '*'
   routes:
-    auth-server:
+    uaa:
       path: /uaa/**
       serviceId: finance-auth-server
       sensitiveHeaders:
       strip-prefix: false
 
-    resource-server:
-      path: /demo/**
-      serviceId: resource-server
+    ribbon-user:
+      path: /ribbon-user/**
+      serviceId: finance-ribbon-user
+      sensitiveHeaders:
+      strip-prefix: false
+
+    user:
+      path: /user/**
+      serviceId: finance-user
       sensitiveHeaders:
       strip-prefix: false
 

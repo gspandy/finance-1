@@ -11,7 +11,7 @@ public interface UserService {
 
     Iterable<UserEntity> findListByTime(Timestamp updateTime, Pageable pageable);
 
-    UserEntity findById(int id);
+    UserEntity findById(long id);
 
     UserEntity findByName(String name);
 
@@ -25,5 +25,5 @@ public interface UserService {
 
     Iterable<UserEntity> update(Iterable<UserEntity> list);
 
-    void delete(int id);
+    void delete(long id);
 }

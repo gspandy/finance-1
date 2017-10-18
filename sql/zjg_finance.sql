@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 10/17/2017 09:24:25 AM
+ Date: 10/18/2017 09:58:13 AM
 */
 
 SET NAMES utf8mb4;
@@ -29,8 +29,46 @@ CREATE TABLE `api_user` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_api_user_name` (`name`) USING BTREE,
-  KEY `idx_finance_user_create_time` (`create_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=78381 DEFAULT CHARSET=utf8 COMMENT='API授权信息表';
+  KEY `idx_api_user_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='API用户信息表';
+
+-- ----------------------------
+--  Records of `api_user`
+-- ----------------------------
+BEGIN;
+INSERT INTO `api_user` VALUES ('1', 'admin', 'admin', '2017-10-17 09:51:30', '2017-10-17 09:51:32'), ('2', 'roc', 'roc', '2017-10-17 13:18:21', '2017-10-17 13:18:23');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `api_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `api_role`;
+CREATE TABLE `api_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(250) NOT NULL COMMENT '角色名称',
+  `value` varchar(50) NOT NULL COMMENT '角色值',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_api_role_name` (`name`) USING BTREE,
+  KEY `idx_api_role_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='API角色信息表';
+
+-- ----------------------------
+--  Table structure for `api_authority`
+-- ----------------------------
+DROP TABLE IF EXISTS `api_authority`;
+CREATE TABLE `api_authority` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(250) NOT NULL COMMENT '角色名称',
+  `value` varchar(50) NOT NULL COMMENT '角色值',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_api_authority_name` (`name`) USING BTREE,
+  KEY `idx_api_authority_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='API权限信息表';
+
 
 -- ----------------------------
 --  Table structure for `finance_user`
@@ -51,7 +89,7 @@ CREATE TABLE `finance_user` (
   UNIQUE KEY `idx_finance_user_mobile` (`mobile`) USING BTREE,
   KEY `idx_finance_user_reg_time` (`reg_time`),
   KEY `idx_finance_user_create_time` (`create_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=78381 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 --  Records of `finance_user`
