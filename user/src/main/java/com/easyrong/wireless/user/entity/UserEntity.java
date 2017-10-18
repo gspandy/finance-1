@@ -1,6 +1,8 @@
 package com.easyrong.wireless.user.entity;
 
 import com.alibaba.fastjson.JSON;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,36 +11,40 @@ import java.sql.Timestamp;
 @Table(name = "finance_user")
 public class UserEntity {
     @Id
+    @Column(name = "id", columnDefinition = "bigint(20) COMMENT '主键'")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false, name = "mobile")
+    @Column(nullable = false, name = "mobile", unique = true, columnDefinition = "bigint(20) COMMENT '电话号码'")
     private long mobile;
 
-    @Column(nullable = false, name = "name")
+    @Column(nullable = false, name = "name", unique = true, columnDefinition = "varchar(250) COMMENT '账户名称'")
     private String name;
 
+    @Column(nullable = false, name = "password", columnDefinition = "varchar(50) COMMENT '密码'")
+    private String password = "xlh123456";
 
-    @Column(nullable = false, name = "password")
-    private String password;
-
-    @Column(nullable = false, name = "type")
+    @Column(nullable = false, name = "type", columnDefinition = "int(11) COMMENT '账户类型 1:金融办 2:金融机构'")
     private int type;
 
-    @Column(name = "duty")
+    @Column(name = "duty", columnDefinition = "varchar(250) COMMENT '账户职务'")
     private String duty;
 
-    @Column(name = "regTime")
+    @CreationTimestamp
+    @Column(nullable = false, name = "regTime", columnDefinition = "DATETIME COMMENT '注册时间'")
     private Timestamp regTime;
 
-    @Column(name = "lastLoginTime")
+    @UpdateTimestamp
+    @Column(nullable = false, name = "lastLoginTime", columnDefinition = "DATETIME COMMENT '最近登录时间'")
     private Timestamp lastLoginTime;
 
-    @Column(nullable = false, name = "createTime")
-    private Timestamp createTime;
+    @CreationTimestamp
+    @Column(nullable = false, name = "createTime", columnDefinition = "DATETIME COMMENT '创建时间'")
+    private Timestamp createTime = new Timestamp(System.currentTimeMillis());
 
-    @Column(nullable = false, name = "updateTime")
-    private Timestamp updateTime;
+    @UpdateTimestamp
+    @Column(nullable = false, name = "updateTime", columnDefinition = "DATETIME COMMENT '修改时间'")
+    private Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
     @Override
     public String toString() {

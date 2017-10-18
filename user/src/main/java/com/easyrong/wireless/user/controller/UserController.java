@@ -48,7 +48,7 @@ public class UserController {
 
     @ApiOperation(value = "获取用户信息", notes = "根据用户id获取单个用户信息")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('query-demo')")
+    @PreAuthorize("hasAuthority('user-service')")
     public Object findOne(@PathVariable("id") long id) throws BaseException {
         return new BaseRspEntity(userService.findById(id));
     }

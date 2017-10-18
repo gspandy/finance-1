@@ -43,7 +43,7 @@ public class ServiceFallbackProvider implements ZuulFallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("server failure, try again latter".getBytes());
+                return new ByteArrayInputStream("service no response, try again latter".getBytes());
             }
 
             @Override
