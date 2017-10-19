@@ -5,8 +5,10 @@ spring:
     config:
       server:
         git:
-          uri: http://172.16.11.124/wireless/finance.git
-          search-paths: finance-config
+          uri: http://172.16.11.124/wireless/finance-repo.git
+          username: sjp
+          password: xlh123456
+#          search-paths: finance-config
 #  rabbitmq:
 #    host: localhost
 #    port: 5672
@@ -14,9 +16,9 @@ spring:
 #    password: guest
 server:
   port: 9002
-management:
-  security:
-    enabled: false
+#management:
+#  security:
+#    enabled: false
 
 eureka:
   client:

@@ -1,20 +1,6 @@
-spring:
-  application:
-    name: finance-user
-  profiles:
-    active: dev
-
 server:
   port: 9030
   context-path: /user
-
-management:
-  security:
-    enabled: false
-
-feign:
-  hystirx:
-    enable: true
 
 eureka:
   instance:

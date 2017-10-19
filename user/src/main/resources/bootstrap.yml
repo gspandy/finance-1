@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: finance-user
+  profiles:
+    active: dev
+  cloud:
+    config:
+      env: dev
+      uri: http://localhost:9002
+      profile: dev
+      label: master
