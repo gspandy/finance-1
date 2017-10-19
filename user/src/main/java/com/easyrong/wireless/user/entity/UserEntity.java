@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(nullable = false, name = "password", columnDefinition = "varchar(50) COMMENT '密码'")
     private String password = "xlh123456";
 
-    @Column(nullable = false, name = "type", columnDefinition = "int(11) COMMENT '账户类型 1:金融办 2:金融机构'")
+    @Column(nullable = false, name = "type", columnDefinition = "int(11) COMMENT '账户类型 1:金融办 2:金融机构 3:企业'")
     private int type;
 
     @Column(name = "duty", columnDefinition = "varchar(250) COMMENT '账户职务'")
